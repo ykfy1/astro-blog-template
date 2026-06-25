@@ -1,26 +1,10 @@
-import { defineConfig } from 'astro/config'
-import svelte from '@astrojs/svelte'
-import mdx from '@astrojs/mdx'
-import remarkGfm from 'remark-gfm'
-import remarkSmartypants from 'remark-smartypants'
-import rehypeExternalLinks from 'rehype-external-links'
-
-// https://astro.build/config
+import { defineConfig } from 'astro/config';
 export default defineConfig({
-  site: 'https://astro-blog-template.netlify.app',
-  integrations: [mdx(), svelte()],
-  markdown: {
-    shikiConfig: {
-      theme: 'nord',
-    },
-    remarkPlugins: [remarkGfm, remarkSmartypants],
-    rehypePlugins: [
-      [
-        rehypeExternalLinks,
-        {
-          target: '_blank',
-        },
-      ],
-    ],
-  },
-})
+  i18n: {
+    defaultLocale: 'zh', // 将默认语言设为中文
+    locales: ['zh', 'en'], // 配置支持的语言列表
+    routing: {
+      prefixDefaultLocale: false // 隐藏默认语言的URL前缀，首页直接显示中文
+    }
+  }
+});
