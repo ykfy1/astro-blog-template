@@ -1,14 +1,26 @@
-import { defineConfig } from "astro/config"
+import { defineConfig } from 'astro/config'
+import svelte from '@astrojs/svelte'
+import mdx from '@astrojs/mdx'
+import remarkGfm from 'remark-gfm'
+import remarkSmartypants from 'remark-smartypants'
+import rehypeExternalLinks from 'rehype-external-links'
+
+// https://astro.build/config
 export default defineConfig({
-  i18n: {
-    locales: ["es", "zh", "fr"],
-    locales: ["es", "zh", {
-      path: "french", // 不包含斜杠
-      codes: ["fr", "fr-BR", "fr-CA"]
-    }],
-    defaultLocale: "zh",
-    routing: {
-        prefixDefaultLocale: true
-    }
-  }
+  site: 'https://astro-blog-template.netlify.app',
+  integrations: [mdx(), svelte()],
+  markdown: {
+    shikiConfig: {
+      theme: 'nord',
+    },
+    remarkPlugins: [remarkGfm, remarkSmartypants],
+    rehypePlugins: [
+      [
+        rehypeExternalLinks,
+        {
+          target: '_blank',
+        },
+      ],
+    ],
+  },
 })
