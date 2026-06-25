@@ -1,10 +1,14 @@
-import { defineConfig } from 'astro/config';
+import { defineConfig } from "astro/config"
 export default defineConfig({
   i18n: {
-    defaultLocale: 'zh', // 将默认语言设为中文
-    locales: ['zh', 'en'], // 配置支持的语言列表
+    locales: ["es", "zh", "fr"],
+    locales: ["es", "zh", {
+      path: "french", // 不包含斜杠
+      codes: ["fr", "fr-BR", "fr-CA"]
+    }],
+    defaultLocale: "zh",
     routing: {
-      prefixDefaultLocale: false // 隐藏默认语言的URL前缀，首页直接显示中文
+        prefixDefaultLocale: true
     }
   }
-});
+})
